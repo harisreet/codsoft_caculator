@@ -10,6 +10,7 @@ public:
     {
         cin. ignore();
         getline(cin,task_name);
+        cout<<"task has been inputed\n";
     }
     //marking task as complete 
     void settask_complete()
@@ -123,6 +124,35 @@ public:
              cout<<"------------------\n";
 
         } while(chance==0);
+    }
+    //function for deleting task
+    void remove_task()
+    {
+        int x,flag=0;
+       do
+       {
+       string rem_name;
+       cout<<"enter the task to be removed : ";
+       cin.ignore();
+       getline(cin,rem_name);
+       for(int q=0;q<no_of_tasks;q++)
+       {
+        if(rem_name == l[q].gettask_name())
+        {
+            flag++;
+           for(int u=q;u<no_of_tasks;u++)
+           {
+                l[u]=l[u+1];
+           }
+        }
+       }
+       cout<<"task has been deleted\n";
+       no_of_tasks-=flag;
+       cout<<"------------------\n";
+        cout<<"press 0 to continue the process to delete the task : ";
+        cin>>x;
+        cout<<"------------------\n";
+       }while(x==0);
 
     }
     //function for displaying 
@@ -131,8 +161,8 @@ public:
         for(int z=0; z<no_of_tasks; z++)
         {
              cout<<"------------------\n";
-            cout<<"task name = "<<l[z].gettask_name()<<endl;
-            cout<<"status = "<<l[z].gettask_status()<<endl;
+             cout<<"task name = "<<l[z].gettask_name()<<endl;
+             cout<<"status = "<<l[z].gettask_status()<<endl;
              cout<<"------------------\n";
         }
     }
@@ -150,7 +180,8 @@ int main()
     cout<<"1 . input tasks \n";
     cout<<"2 . add additional tasks \n";
     cout<<"3 . mark task status \n";
-    cout<<"4 . display the tasks \n\n";
+    cout<<"4 . remove the task\n";
+    cout<<"5 . display the tasks \n\n";
     cout<<"------------------\n";
 
     do
@@ -172,6 +203,9 @@ int main()
             t.task_status();
             break;
         case 4:
+            t.remove_task();
+            break;
+        case 5:
             t.display();
             break;
         default:
